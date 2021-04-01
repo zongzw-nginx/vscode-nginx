@@ -1,10 +1,12 @@
 #!/bin/bash
 
-tgtdir=/Users/zong/Documents/nginx
-njs_src_dir=/Users/zong/GitRepos/local/nginx/njs-3f094214cd64
-cdir=`cd $(dirname $0); pwd`
+workdir=`cd $(dirname $0); pwd`
+tgtdir=$workdir/execs/nginx
+mkdir -p $tgtdir
+# njs_src_dir=/Users/zong/GitRepos/local/nginx/njs-3f094214cd64
+codesdir=$workdir/codes
 (
-    cd $cdir/nginx-1.16.1
+    cd $codesdir/nginx-1.16.1
 
     set -e
     for option; do
@@ -14,7 +16,8 @@ cdir=`cd $(dirname $0); pwd`
                 ./configure --with-debug --with-cc=/usr/bin/cc --with-cc-opt='-O0 -g' \
                     --prefix=$tgtdir \
                     --with-stream \
-                    --add-dynamic-module=$njs_src_dir/nginx
+                    --add-module=$codesdir/ngx_dynamic_upstream
+                    # --add-dynamic-module=$njs_src_dir/nginx
                 ;;
             make)
                 # bear make # Generates empty compile_commands.json on darwin
@@ -22,6 +25,7 @@ cdir=`cd $(dirname $0); pwd`
                 ;;
             install)
                 make install
+                cp $workdir/conf.d/nginx.conf $tgtdir/conf/nginx.conf
                 ;;
             *)
                 echo "$0 [conf[igure]|make|install]"
