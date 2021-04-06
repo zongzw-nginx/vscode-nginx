@@ -1,0 +1,59 @@
+{
+    "nginx_cluster": {
+        "nginx_hosts": [
+            "localhost:8080"
+        ],
+        "dyups_endpoint": "dynamic",
+        "upstream_zone": "zone_for_backends"
+        
+    },
+    "upstream_servers": {
+        "10.250.70.5:80": {
+            "weight": 10,
+            "checker": "http_get"
+        },
+        "10.250.70.10:80": {
+            "weight": 10,
+            "checker": "http_get"
+        },
+        "10.250.70.15:80": {
+            "weight": 10,
+            "checker": "icmp"
+        },
+        "10.250.70.17:80": {
+            "weight": 10,
+            "checker": "http_get"
+        },
+        "10.250.70.24:80": {
+            "weight": 10,
+            "checker": "icmp"
+        }
+    },
+    "health_monitors": {
+        "http_get": {
+            "type": "HTTP",
+            "interval": 5,
+            "timeout": 16,
+            "send_string": "GET /\r\n",
+            "receive_string": "",
+            "username": "",
+            "password": "",
+            "alias_address": "*"
+        },
+        "http2_head": {
+            "type": "HTTP/2",
+            "interval": 5,
+            "timeout": 16,
+            "send_string": "HEAD /\r\n\r\n",
+            "receive_string": "Server:",
+            "username": "",
+            "password": "",
+            "alias_address": "*"
+        },
+        "icmp": {
+            "interval": 5,
+            "timeout": 16,
+            "transparent": false
+        }
+    }
+}
