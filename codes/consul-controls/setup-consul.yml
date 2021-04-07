@@ -1,0 +1,28 @@
+---
+
+- hosts: servers
+  remote_user: root
+  gather_facts: false
+  tasks:
+    - name: check reachable
+      ping:
+    
+    - name: install yum dependencies
+      yum:
+        name:
+          - yum-utils
+          - vim
+          - wget
+          - curl
+        state: present
+    
+    - name: setup consul yum repo link
+      shell: yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    
+    - name: install consul packages
+      yum:
+        name: consul
+        state: present
+      
+    - name: start consul servers
+      

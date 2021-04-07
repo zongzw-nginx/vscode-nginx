@@ -2,7 +2,7 @@
 
 workdir=`cd $(dirname $0); pwd`
 tgtdir=$workdir/execs/nginx
-mkdir -p $tgtdir
+# tgtdir=/root/nginx
 # njs_src_dir=/Users/zong/GitRepos/local/nginx/njs-3f094214cd64
 codesdir=$workdir/codes
 (
@@ -24,6 +24,7 @@ codesdir=$workdir/codes
                 intercept-build --override-compiler make CC=intercept-cc CXX=intercept-c++
                 ;;
             install)
+                mkdir -p $tgtdir
                 make install
                 cp $workdir/conf.d/nginx.conf $tgtdir/conf/nginx.conf
                 ;;

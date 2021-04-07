@@ -1,0 +1,53 @@
+---
+
+- hosts: servers
+  remote_user: centos
+  gather_facts: false
+  tasks:
+    - name: reachability
+      ping:
+    - name: run echo
+      shell: echo {{ inventory_hostname }}
+      become: true
+      become_user: root
+
+    - name: setup resolv.conf
+      template:
+        src: ./templates/resolv.conf.j2
+        dest: /etc/resolv.conf
+      become: true
+      become_user: root
+
+    - name: copy ssh key to remote hosts
+      blockinfile:
+        block: "{{ lookup('file', '/Users/zong/.ssh/id_rsa.pub')}}"
+        dest: /root/.ssh/authorized_keys
+      become: true
+      become_user: root
+    
+    - name: update /etc/ssh/sshd_config
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        replace: "{{ item.replace }}"
+      with_items:
+        - regexp: '^PasswordAuthentication no'
+          replace: 'PasswordAuthentication yes'
+        - regexp: '#.*UseDNS .*'
+          replace: 'UseDNS no'
+        - regexp: '#.*PermitRootLogin .*'
+          replace: 'PermitRootLogin yes'
+      become: true
+      become_user: root
+
+    - name: restart sshd service
+      systemd:
+        name: sshd
+        state: restarted
+      become: true
+      become_user: root
+
+    - name: set root password
+      shell: echo default | passwd root --stdin
+      become: true
+      become_user: root
