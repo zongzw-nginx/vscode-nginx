@@ -51,3 +51,13 @@
       shell: echo default | passwd root --stdin
       become: true
       become_user: root
+
+    # - name: stop useless services
+    #   systemd:
+    #     state: stopped
+    #     name: "{{ item }}"
+    #   with_items:
+    #     - firewalld
+    #     - NetworkManager
+    #   become: true
+    #   become_user: root

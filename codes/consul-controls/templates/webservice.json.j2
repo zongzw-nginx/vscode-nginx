@@ -1,0 +1,16 @@
+{
+  "service": {
+    "name": "{{ service_name }}",
+    "tags": [
+        "{{ service_tags | default() }}"
+    ],
+    "port": {{ service_port }},
+    "check": {
+      "args": [
+        "curl",
+        "{{ service_ip }}"
+      ],
+      "interval": "{{ interval }}s"
+    }
+  }
+}
