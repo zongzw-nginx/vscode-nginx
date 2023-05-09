@@ -8,10 +8,11 @@
             "type": "lldb",
             "request": "launch",
             "name": "(lldb) Launch",
-            "program": "${workspaceFolder}/objs/nginx",
+            "program": "${workspaceFolder}/codes/nginx-1.16.1/objs/nginx",
             "args": [
                 "-c",
-                "/Users/zong/Documents/nginx/conf/nginx.conf"
+                // "/Users/zong/Documents/nginx/conf/nginx.conf"
+                "${workspaceFolder}/conf.d/nginx.conf"
             ],
             "cwd": "${workspaceFolder}"
         }
