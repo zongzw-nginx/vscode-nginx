@@ -1,0 +1,5 @@
+*.so
+main
+test
+*.o
+logs

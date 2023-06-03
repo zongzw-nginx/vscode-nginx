@@ -7,13 +7,14 @@
             ],
             "defines": [],
             "macFrameworkPath": [
+                // update this framework path to actual path
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/System/Library/Frameworks"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64",
-            "compileCommands": "${workspaceFolder}/compile_commands.json"
+            "intelliSenseMode": "clang-x64"
+            // "compileCommands": "${workspaceFolder}/codes/nginx-1.24.0/compile_commands.json"
         }
     ],
     "version": 4

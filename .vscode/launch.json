@@ -1,47 +1,40 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "lldb",
+            "type": "cppdbg",
+            // "type": "lldb", // DON'T USE IT. See the next commented configuration.
             "request": "launch",
-            "name": "(lldb) Launch",
-            "program": "${workspaceFolder}/codes/nginx-1.16.1/objs/nginx",
+            "name": "(lldb) Launch nginx",
+            "program": "${workspaceFolder}/codes/nginx-1.24.0/objs/nginx",
             "args": [
                 "-c",
-                // "/Users/zong/Documents/nginx/conf/nginx.conf"
                 "${workspaceFolder}/conf.d/nginx.conf"
             ],
-            "cwd": "${workspaceFolder}"
-        }
+            "cwd": "${workspaceFolder}",
+            "MIMode": "lldb"
+        },
         // {
-        //     "name": "(gdb) Launch",
-        //     "type": "cppdbg",
+        //     "type": "lldb",  // 不要使用这种方式，它会导致在watch窗口无法做数据类型的强制转换。
         //     "request": "launch",
-        //     "program": "${workspaceFolder}/objs/nginx",
-        //     "args": [
-        //         "-c",
-        //         "/Users/zong/Documents/nginx/conf/nginx.conf"
-        //     ],
-        //     "stopAtEntry": true,
-        //     "cwd": "${workspaceFolder}",
-        //     "environment": [],
-        //     "externalConsole": false,
-        //     "MIMode": "gdb",
-        //     "setupCommands": [
-        //         {
-        //             "description": "Enable pretty-printing for gdb",
-        //             "text": "-enable-pretty-printing",
-        //             "ignoreFailures": true
-        //         }
-        //     ],
-        //     "miDebuggerPath": "/usr/local/bin/gdb",
-        //     "logging": {
-        //         "engineLogging": true,
-        //         "programOutput": true
-        //     }
-        // }
+        //     "name": "Launch",
+        //     "program": "${workspaceFolder}/<program>",
+        //     "args": [],
+        //     "cwd": "${workspaceFolder}"
+        // },
+        {
+            "name": "(lldb) Launch test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/codes/ngx-types-funcs-test/test",
+            "args": [
+                "${workspaceFolder}/codes/ngx-types-funcs-test"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/codes/ngx-types-funcs-test",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
     ]
 }
